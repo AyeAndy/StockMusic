@@ -1,7 +1,3 @@
-<script type="text/javascript" src="http://cdn.tonejs.org/latest/Tone.min.js"></script>
-
-<script type="text/javascript">
-
 var currentIndex = 0;
 var synth = new Tone.SimpleSynth().toMaster();
 var pattern = new Tone.Pattern(function(time, note){
@@ -42,4 +38,3 @@ function myfunction() {
     }
 }
 
-</script>
