@@ -40,6 +40,7 @@ $(document).ready(function() {
           $('#header-date-range').text("(" + startDate + " to " + endDate + ")");
           console.log(resultData);
           var data = resultData.dataset_data.data;
+          localStorage.setItem('JSONdata', JSON.stringify(resultData));
           length = data.length;
           var chartData = {
             labels: [],

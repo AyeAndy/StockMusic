@@ -58,6 +58,8 @@ function getData() {
 /* Takes in an int representing data, and play the note depending on the data */
 function playNotes(){
 
+    getData();
+
     synth = new Tone.SimpleSynth().toMaster();
     var toPlay = new Array(currentData.length);
 
@@ -81,7 +83,3 @@ function stopNotes(){
   Tone.Transport.stop();
 
 }
-
-
-
-
