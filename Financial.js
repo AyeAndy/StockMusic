@@ -1,11 +1,6 @@
-//options for graph
-var graphOptions = {
-  showTooltips: false,
-  pointDot : false,
-  datasetFill : false,
-};
-
-var MONTHS = ["JAN", "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEPT","OCT", "NOV", "DEC"]
+var MONTHS = ["JAN", "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEPT","OCT", "NOV", "DEC"];
+var pos = 0;
+var length = 0;
 
 $(document).ready(function() {
 
@@ -40,6 +35,7 @@ $(document).ready(function() {
           success: function(resultData){
             // var toString = JSON.stringify(resultData);
             var data = resultData.dataset_data.data;
+            length = data.length;
             var chartData = {
               labels: [],
               datasets:[
@@ -51,7 +47,6 @@ $(document).ready(function() {
                   }
               ]
             }
-            console.log(chartData);
 
             var time1 = 0;
             var time2 = data.length/4;
@@ -73,30 +68,49 @@ $(document).ready(function() {
             }
 
             var context = $("#chart").get(0).getContext("2d");
-            var myNewChart = new Chart(context).Line(chartData, graphOptions);
+            var chart = new Chart(context).TickerLine(chartData, null);
+
+            var id = setInterval(function (){
+
+                if(pos == length)
+                    clearInterval(id);
+                else{
+                    chart.clear();
+                    pos++;
+                    chart.update();
+                }
+            }, 10);
+              
+            $('#infoModal').modal("hide");
           },
           failure: function(err){
             console.log(err);
           }
       });
-
-  $('#infoModal').modal("hide");
-
-  // animate the ticker
-  // myMove();
   });
 });
 
-function myMove() {
-    var chart = document.getElementById("chart"); 
-    var context = chart.getContext("2d");
-    var pos = 0;
-    var id = setInterval(frame, 5);
-    function frame() {
-        if (pos == 350) {
-            clearInterval(id);
-        } else {
-            pos++; 
+Chart.types.Line.extend({
+    name: "TickerLine",
+    defaults: {
+        showTooltips: false,
+        pointDot : false,
+        datasetFill : false,
+    },
+    draw: function () {
+        Chart.types.Line.prototype.draw.apply(this, arguments);
+
+        var point = this.datasets[0].points[pos];
+        var scale = this.scale;
+
+        if(pos < length){
+            // draw line
+            this.chart.ctx.beginPath();
+            this.chart.ctx.moveTo(point.x, scale.startPoint + 24);
+            this.chart.ctx.strokeStyle = '#ff0000';
+            this.chart.ctx.lineTo(point.x, scale.endPoint);
+            this.chart.ctx.stroke();
         }
     }
-}
+});
+
