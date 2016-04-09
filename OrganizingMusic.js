@@ -52,8 +52,6 @@ function getData() {
     currentNote[i] = noteToAdd;
   }
 
-  playNotes();
-
 }
 
 /* Takes in an int representing data, and play the note depending on the data */
@@ -72,7 +70,7 @@ function playNotes(){
     }, toPlay);
 
     pattern.start(0);
-    Tone.Transport.bpm.value = 300;
+    Tone.Transport.bpm.value = 200;
     Tone.Transport.start();
 }
 

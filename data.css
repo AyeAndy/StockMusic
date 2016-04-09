@@ -1,5 +1,5 @@
 body{
-  background-color: #FDE071;
+  background-color: #E0E4CC;
 }
 div.header-separator{
   background-color: white;
@@ -13,22 +13,22 @@ div.header-separator{
   margin-right: 50px;
 }
 #triggerModal{
-  background-color: #FD7E85;
+  background-color: #F38630;
   border: none;
 }
 #genre{
   margin-top: 30px;
-  background-color: #FD7E85;
+  background-color: #F38630;
   border: none;
 }
 #play{
   margin-top: 30px;
-  background-color: #FD7E85;
+  background-color: #F38630;
   border: none;
 }
 #stop{
   margin-top:30px;
-  background-color: #FD7E85;
+  background-color: #F38630;
   border: none;
 }
 #chart{
@@ -36,7 +36,7 @@ div.header-separator{
 }
 #top-header{
   margin-top: 30px;
-  background-color: #B57FA0;
+  background-color: #69D2E7;
   height: 60px;
   padding-left: 20px;
   padding-bottom: 2px;
@@ -50,7 +50,7 @@ div.header-separator{
   visibility: hidden;
 }
 #chart-container{
-  background-color: #FFFCDF;
+  background-color: #FFFFFF;
   padding-top: 10px;
   margin-left: 100px;
   margin-right: 100px;
