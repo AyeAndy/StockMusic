@@ -6,6 +6,10 @@ $(document).ready(function() {
 
   $('#infoModal').modal("show");
 
+  $('#triggerModal').click(function(){
+    $('#infoModal').modal("show");
+  });
+
   $('#getdata-btn').click(function() {
 
     var symbol = $('#symbol').val();
