@@ -35,17 +35,20 @@ $(document).ready(function() {
             start_date: startDate,
             end_date: endDate,
             exclude_column_names: true,
-            column_index: 4
           },
           success: function(resultData){
-            // var toString = JSON.stringify(resultData);
+            console.log(resultData);
             var data = resultData.dataset_data.data;
             var chartData = {
               labels: [],
               datasets:[
                   {
-                    // strokeColor: "rgba(49, 225, 90, 2)",
                     strokeColor: "rgba(65, 105, 225, 1)",
+                    label: symbol,
+                    data: []
+                  },
+                  {
+                    strokeColor: "rgba(99, 204, 236, 1)",
                     label: symbol,
                     data: []
                   }
@@ -69,6 +72,7 @@ $(document).ready(function() {
                   chartData.labels.push("");
                 }
 
+                chartData.datasets[1].data.push(data[i][2]);
                 chartData.datasets[0].data.push(data[i][1]);
             }
 
@@ -88,7 +92,7 @@ $(document).ready(function() {
 });
 
 function myMove() {
-    var chart = document.getElementById("chart"); 
+    var chart = document.getElementById("chart");
     var context = chart.getContext("2d");
     var pos = 0;
     var id = setInterval(frame, 5);
@@ -96,7 +100,7 @@ function myMove() {
         if (pos == 350) {
             clearInterval(id);
         } else {
-            pos++; 
+            pos++;
         }
     }
 }
