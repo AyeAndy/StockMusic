@@ -5,6 +5,8 @@ var graphOptions = {
   datasetFill : false,
 };
 
+var MONTHS = ["JAN", "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEPT","OCT", "NOV", "DEC"]
+
 $(document).ready(function() {
 
   $('#infoModal').modal("show");
@@ -42,7 +44,8 @@ $(document).ready(function() {
               labels: [],
               datasets:[
                   {
-                    strokeColor: "rgba(49, 225, 90, 2)",
+                    // strokeColor: "rgba(49, 225, 90, 2)",
+                    strokeColor: "rgba(65, 105, 225, 1)",
                     label: symbol,
                     data: []
                   }
@@ -59,7 +62,8 @@ $(document).ready(function() {
             for (var i = 0; i < data.length; i++){
 
                 if(i == time1 || i == time2 || i == time3 || i == time4 || i == time5){
-                  chartData.labels.push(data[i][0]);
+                  var month = Number(data[i][0].split("-")[1]) - 1;
+                  chartData.labels.push(MONTHS[month]);
                 }
                 else{
                   chartData.labels.push("");
@@ -67,7 +71,6 @@ $(document).ready(function() {
 
                 chartData.datasets[0].data.push(data[i][1]);
             }
-
 
             var context = $("#chart").get(0).getContext("2d");
             var myNewChart = new Chart(context).Line(chartData, graphOptions);
@@ -77,9 +80,23 @@ $(document).ready(function() {
           }
       });
 
-
   $('#infoModal').modal("hide");
 
-
+  // animate the ticker
+  // myMove();
   });
 });
+
+function myMove() {
+    var chart = document.getElementById("chart"); 
+    var context = chart.getContext("2d");
+    var pos = 0;
+    var id = setInterval(frame, 5);
+    function frame() {
+        if (pos == 350) {
+            clearInterval(id);
+        } else {
+            pos++; 
+        }
+    }
+}
