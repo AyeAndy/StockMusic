@@ -27,18 +27,31 @@ $(document).ready(function() {
             api_key: "zzDUgBZpN8za7SvaPCTv",
             exclude_column_names: true,
             column_index: 4
-
           },
           success: function(resultData){
-            var toString = JSON.stringify(resultData);
-
-            console.log(resultData);
+            // var toString = JSON.stringify(resultData);
+            var data = resultData.dataset_data.data;
+            var chartData = {
+                labels: [],
+                datasets:[
+                    {
+                        label: symbol,
+                        data: []
+                    }
+                ]
+            }
+            console.log(chartData);
+            for (var i = 0; i < data.length; i++){
+                chartData.labels.push("");
+                chartData.datasets[0].data.push(data[i][1]);
+            }   
+            var context = $("#chart").get(0).getContext("2d");
+            var myNewChart = new Chart(context).Line(chartData, null);
           },
           failure: function(err){
             console.log(err);
           }
       });
-
 
       $('#infoModal').modal("hide");
   
