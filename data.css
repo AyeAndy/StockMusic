@@ -7,6 +7,33 @@ div.header-separator{
   margin-right: 100px;
   height:4px;
 }
+.btn-group-vertical{
+  float: right;
+  margin-top: 200px;
+  margin-right: 50px;
+}
+#triggerModal{
+  background-color: #FD7E85;
+  border: none;
+}
+#genre{
+  margin-top: 30px;
+  background-color: #FD7E85;
+  border: none;
+}
+#play{
+  margin-top: 30px;
+  background-color: #FD7E85;
+  border: none;
+}
+#stop{
+  margin-top:30px;
+  background-color: #FD7E85;
+  border: none;
+}
+#chart{
+  margin-left: 50px;
+}
 #top-header{
   margin-top: 30px;
   background-color: #B57FA0;
@@ -23,7 +50,6 @@ div.header-separator{
   visibility: hidden;
 }
 #chart-container{
-  text-align: center;
   background-color: #FFFCDF;
   padding-top: 10px;
   margin-left: 100px;
