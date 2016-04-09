@@ -6,6 +6,7 @@ var blueScale = ["C3", "Eb3", "F3", "F#3", "G3", "Bb3", "C4", "Eb4", "F4", "F#4"
 var pattern;
 var currentData;
 var currentNote;
+var bpm = 200;
 
 
 function getData() {
@@ -70,7 +71,7 @@ function playNotes(){
     }, toPlay);
 
     pattern.start(0);
-    Tone.Transport.bpm.value = 200;
+    Tone.Transport.bpm.value = bpm;
     Tone.Transport.start();
 }
 
