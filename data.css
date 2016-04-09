@@ -1,6 +1,40 @@
+body{
+  background-color: #FDE071;
+}
+div.header-separator{
+  background-color: white;
+  margin-left: 100px;
+  margin-right: 100px;
+  height:4px;
+}
+#top-header{
+  margin-top: 30px;
+  background-color: #B57FA0;
+  height: 60px;
+  padding-left: 90px;
+  padding-bottom: 2px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
 #data-input-error{
-  margin-right: 80px;
+  margin-right: 100px;
   color: #b30000;
   font-style: italic;
   visibility: hidden;
+}
+#chart-container{
+  text-align: center;
+  background-color: #FFFCDF;
+  padding-top: 10px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+#header-symbol{
+  float: left;
+  color:white;
+}
+#header-date-range{
+  margin-right: 20px;
+  padding-top: 30px;
+  color:white;
 }

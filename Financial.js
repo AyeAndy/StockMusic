@@ -1,6 +1,6 @@
-var MONTHS = ["JAN", "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEPT","OCT", "NOV", "DEC"];
 var pos = 0;
 var length = 0;
+var MONTHS = ["JAN", "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEPT","OCT", "NOV", "DEC"]
 
 $(document).ready(function() {
 
@@ -28,20 +28,25 @@ $(document).ready(function() {
             api_key: "zzDUgBZpN8za7SvaPCTv",
             order: "asc",
             start_date: startDate,
-            end_date: endDate,
-            exclude_column_names: true,
-            column_index: 4
+            end_date: endDate
           },
           success: function(resultData){
-            // var toString = JSON.stringify(resultData);
+            $('#header-symbol').text(symbol);
+            $('#header-date-range').text(startDate + " to " + endDate);
+            $('#header-date-range').text("(" + startDate + " to " + endDate + ")");
+            console.log(resultData);
             var data = resultData.dataset_data.data;
             length = data.length;
             var chartData = {
               labels: [],
               datasets:[
                   {
-                    // strokeColor: "rgba(49, 225, 90, 2)",
                     strokeColor: "rgba(65, 105, 225, 1)",
+                    label: symbol,
+                    data: []
+                  },
+                  {
+                    strokeColor: "rgba(216, 12, 60, 1)",
                     label: symbol,
                     data: []
                   }
@@ -64,7 +69,8 @@ $(document).ready(function() {
                   chartData.labels.push("");
                 }
 
-                chartData.datasets[0].data.push(data[i][1]);
+                chartData.datasets[0].data.push(data[i][2]);
+                chartData.datasets[1].data.push(data[i][3]);
             }
 
             var context = $("#chart").get(0).getContext("2d");
