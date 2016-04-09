@@ -1,4 +1,4 @@
-var pos = 0;
+var pos;
 var length = 0;
 var MONTHS = ["JAN", "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEPT","OCT", "NOV", "DEC"]
 
@@ -10,11 +10,32 @@ $(document).ready(function() {
     $('#infoModal').modal("show");
   });
 
+  $('#genre').click(function(){
+    $('#genreModal').modal("show");
+  });
+
+  $('#MajorButton').click(function() {
+    currentScale = majorScale;
+  });
+
+  $('#MinorButton').click(function() {
+    currentScale = minorScale;
+  });
+
+  $('#WesternButton').click(function() {
+    currentScale = westernScale;
+  });
+
+  $('#BluesButton').click(function() {
+    currentScale = blueScale;
+  });
+
   $('#getdata-btn').click(function() {
 
     var symbol = $('#symbol').val();
     var startDate = $('#start-date').val();
     var endDate = $('#end-date').val();
+    pos = 0;
 
     if(symbol == '' || startDate == '' || endDate == ''){
         symbol = "AAPL";
