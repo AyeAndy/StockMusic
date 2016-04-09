@@ -61,9 +61,9 @@ function playNotes(){
     for(var i = 0; i < currentData.length; i++){
       var note = currentNote[i];
       toPlay[i] = majorScale[note];
-      document.write(toPlay[i] + " ");
+      /*document.write(toPlay[i] + " ");
       document.write(currentData[i]);
-      document.write("<br></br>");
+      document.write("<br></br>");*/
     }
 
     pattern = new Tone.Pattern(function(time, note){
