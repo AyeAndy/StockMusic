@@ -1,6 +1,34 @@
+body{
+  background-color: #f2f2f2;
+}
+div.header-separator{
+  margin-left: 70px;
+  margin-right: 70px;
+  height:4px;
+}
+#top-header{
+  margin-top: 10px;
+  background-color: #e600e6;
+  text-align: center;
+  height: 60px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-left: 70px;
+  margin-right: 70px;
+}
 #data-input-error{
-  margin-right: 80px;
+  margin-right: 100px;
   color: #b30000;
   font-style: italic;
   visibility: hidden;
+}
+#chart-container{
+  text-align: center;
+  background-color: #ffccff;
+  padding-top: 10px;
+  margin-left: 70px;
+  margin-right: 70px;
+}
+#header-symbol{
+  color:white;
 }
