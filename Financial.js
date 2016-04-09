@@ -9,10 +9,10 @@ $(document).ready(function() {
     var endDate = $('#end-date').val();
 
     if(symbol == '' || startDate == '' || endDate == ''){
-      $('#data-input-error').text("Please fill in the fields appropriately.");
-      $('#data-input-error').css("visibility","visible");
+        symbol = "AAPL";
+        startDate = "2015-01-01";
+        endDate = "2016-01-03";
     }
-    else{
 
       var url_string = "https://www.quandl.com/api/v3/datasets/WIKI/" + symbol + "/data.json";
 
@@ -25,20 +25,24 @@ $(document).ready(function() {
             order: "asc",
             start_date: startDate,
             end_date: endDate,
+            exclude_column_names: true,
             column_index: 4
+
           },
           success: function(resultData){
             var toString = JSON.stringify(resultData);
-            $('#data').text(toString);
-            console.log(resultData[data]);
 
-            $('#infoModal').modal("hide");
+            console.log(resultData);
           },
           failure: function(err){
             console.log(err);
           }
       });
 
-  }
+  
+
+  $('#infoModal').modal("hide");
+
+
   });
 });
