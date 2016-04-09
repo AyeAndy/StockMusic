@@ -3,6 +3,7 @@ var graphOptions = {
   showTooltips: false,
   pointDot : false,
   datasetFill : false,
+  scaleShowGridLines : false
 };
 
 var MONTHS = ["JAN", "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEPT","OCT", "NOV", "DEC"]
@@ -37,6 +38,7 @@ $(document).ready(function() {
           },
           success: function(resultData){
             $('#header-symbol').text(symbol);
+            $('#header-date-range').text(startDate + " to " + endDate);
             $('#header-date-range').text("(" + startDate + " to " + endDate + ")");
             console.log(resultData);
             var data = resultData.dataset_data.data;
