@@ -56,7 +56,7 @@ $(document).ready(function() {
         },
         success: function(resultData){
           $('#header-symbol').text(symbol);
-          $('#header-date-range').text("(" + startDate + " to " + endDate + ")");
+          // $('#header-date-range').text("(" + startDate + " to " + endDate + ")");
           var data = resultData.dataset_data.data;
           length = data.length;
           localStorage.setItem('JSONdata', JSON.stringify(resultData));
@@ -95,6 +95,10 @@ $(document).ready(function() {
               chartData.datasets[0].data.push(data[i][2]);
               chartData.datasets[1].data.push(data[i][3]);
           }
+
+          chartData.labels[0] += " '" + startDate.split('-')[0].slice(2,4);
+          console.log(chartData.labels[0]);
+          chartData.labels[data.length - 1] += " '" + endDate.split('-')[0].slice(2,4);
 
           var context = $("#chart").get(0).getContext("2d");
           chart = new Chart(context).TickerLine(chartData, null);
