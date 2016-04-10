@@ -1,10 +1,16 @@
 var synth = new Tone.SimpleSynth().toMaster();
-var majorScale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"];
-var minorScale = ["C4", "D4", "Eb4", "F4", "G4", "A4", "Bb4", "C5"];
+var majorScale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5", "D5", "E5", "F5", "G5", "A5", "B5", "C6", "D6"];
+var minorScale = ["C4", "D4", "Eb4", "F4", "G4", "A4", "Bb4", "C5", "D5", "Eb5", "F5", "G5", "A5", "Bb5", "C6", "Eb6"];
+var westernScale = ["G3", "A3", "C4", "D4", "E4", "G4", "A4", "C5", "D5", "E5", "G5", "A5", "C6", "D6", "E6", "G6"];
+var blueScale = ["C3", "Eb3", "F3", "F#3", "G3", "Bb3", "C4", "Eb4", "F4", "F#4", "G4", "Bb4", "C5", "Eb5", "F5", "F#5"];
+var currentScale = majorScale;
+var picked;
 var pattern;
 var currentData;
 var currentNote;
-
+//var audio = new Audio('DrumsBlues.mp3');
+var bpm = 240;
+var id = 0; // fill this later in Financial.js, id of the refreshing "process"
 
 function getData() {
 
@@ -31,7 +37,7 @@ function getData() {
     }
   }
 
-  var difference = (max-min)/8;
+  var difference = (max-min)/16;
   currentNote = new Array(currentData.length);
 
   for(var i = 0; i < currentData.length; i++){
@@ -52,33 +58,44 @@ function getData() {
 
 }
 
+function pickGenre(){
+
+  var buttonPicked;
+}
+
 /* Takes in an int representing data, and play the note depending on the data */
 function playNotes(){
 
-    var synth = new Tone.SimpleSynth().toMaster();
+    getData();
+
+    synth = new Tone.SimpleSynth().toMaster();
     var toPlay = new Array(currentData.length);
 
     for(var i = 0; i < currentData.length; i++){
       var note = currentNote[i];
-      toPlay[i] = majorScale[note];
-      /*document.write(toPlay[i] + " ");
-      document.write(currentData[i]);
-      document.write("<br></br>");*/
+      toPlay[i] = currentScale[note];
     }
 
     pattern = new Tone.Pattern(function(time, note){
-    synth.triggerAttackRelease(note, 0.25);
+    synth.triggerAttackRelease(note, "4n");
     }, toPlay);
 
     pattern.start(0);
-    Tone.Transport.bpm.value = 100;
+    Tone.Transport.bpm.value = bpm;
     Tone.Transport.start();
+
+    id = setInterval(function (){
+
+      chart.clear();
+      pos = (pos + 0.5) % length;
+      chart.update();
+    }, 125); // we update twice as often for smoother animation
 }
 
 function stopNotes(){
 
   pattern.stop(0);
+  clearInterval(id);
   Tone.Transport.stop();
 
 }
-
