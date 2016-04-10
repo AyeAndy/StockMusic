@@ -3,9 +3,9 @@ var majorScale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5", "D5", "E5", "F
 var minorScale = ["C4", "D4", "Eb4", "F4", "G4", "A4", "Bb4", "C5", "D5", "Eb5", "F5", "G5", "A5", "Bb5", "C6", "Eb6"];
 var westernScale = ["G3", "A3", "C4", "D4", "E4", "G4", "A4", "C5", "D5", "E5", "G5", "A5", "C6", "D6", "E6", "G6"];
 var blueScale = ["C3", "Eb3", "F3", "F#3", "G3", "Bb3", "C4", "Eb4", "F4", "F#4", "G4", "Bb4", "C5", "Eb5", "F5", "F#5"];
-var currentScale;
+var currentScale = blueScale;
 var picked;
-var audio;
+var audio = new Audio("DrumsBlues.mp3");
 var pattern;
 var currentData;
 var currentNote;
@@ -105,5 +105,7 @@ function stopNotes(){
     pattern.stop(0);
     audio.pause();
     Tone.Transport.stop();
+    pos = 0;
+    chart.update();
     clearInterval(id);
 }
