@@ -1,0 +1,63 @@
+body{
+  background-color: #F38630;
+}
+
+div.header-separator{
+  background-color: white;
+  margin-left: 100px;
+  margin-right: 100px;
+  height:4px;
+}
+.btn-group-vertical{
+  float: right;
+  margin-top: 150px;
+  margin-right: 50px;
+}
+#triggerModal{
+  background-color: #3299BB;
+  border: none;
+}
+#genre{
+  margin-top: 30px;
+  background-color: #3299BB;
+  border: none;
+}
+
+#stop{
+  margin-top:30px;
+  background-color: #3299BB;
+  border: none;
+}
+#chart{
+  margin-left: 25px;
+}
+#top-header{
+  margin-top: 30px;
+  background-color: #424242;
+  height: 90px;
+  padding-left: 20px;
+  padding-bottom: 2px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+#data-input-error{
+  margin-right: 100px;
+  color: #b30000;
+  font-style: italic;
+  visibility: hidden;
+}
+#chart-container{
+  background-color: #FFFFFF;
+  padding-top: 8px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+#header-symbol{
+  float: left;
+  color:white;
+}
+#header-date-range{
+  margin-left: 20px;
+  padding-top: 30px;
+  color:white;
+}
