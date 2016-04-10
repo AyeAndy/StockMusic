@@ -1,7 +1,7 @@
-var pos;
-var length = 0;
+var pos = 0;
+var chart;
+var length;
 var MONTHS = ["JAN", "FEB", "MAR", "APRIL", "MAY", "JUNE", "JULY", "AUG", "SEPT","OCT", "NOV", "DEC"]
-
 $(document).ready(function() {
 
   $('#infoModal').modal("show");
@@ -35,14 +35,13 @@ $(document).ready(function() {
     var symbol = $('#symbol').val();
     var startDate = $('#start-date').val();
     var endDate = $('#end-date').val();
-    pos = 0;
 
-    if(symbol == '' || startDate == '' || endDate == ''){
+    if(symbol == "")
         symbol = "AAPL";
+    if(startDate == "")
         startDate = "2015-01-01";
-        endDate = "2016-01-03";
-    }
-
+    if(endDate == "")
+        endDate = "2016-01-01";
     var url_string = "https://www.quandl.com/api/v3/datasets/WIKI/" + symbol + "/data.json";
 
     $.ajax({
@@ -57,12 +56,10 @@ $(document).ready(function() {
         },
         success: function(resultData){
           $('#header-symbol').text(symbol);
-          $('#header-date-range').text(startDate + " to " + endDate);
           $('#header-date-range').text("(" + startDate + " to " + endDate + ")");
-          console.log(resultData);
           var data = resultData.dataset_data.data;
-          localStorage.setItem('JSONdata', JSON.stringify(resultData));
           length = data.length;
+          localStorage.setItem('JSONdata', JSON.stringify(resultData));
           var chartData = {
             labels: [],
             datasets:[
@@ -80,10 +77,10 @@ $(document).ready(function() {
           }
 
           var time1 = 0;
-          var time2 = data.length/4;
-          var time3 = data.length/2;
-          var time4 = data.length*3/4;
-          var time5 = data.length-1;
+          var time2 = Math.floor(data.length/4);
+          var time3 = Math.floor(data.length/2);
+          var time4 = Math.floor(data.length*3/4);
+          var time5 = Math.floor(data.length-1);
 
           for (var i = 0; i < data.length; i++){
 
@@ -100,23 +97,14 @@ $(document).ready(function() {
           }
 
           var context = $("#chart").get(0).getContext("2d");
-          var chart = new Chart(context).TickerLine(chartData, null);
-
-          var id = setInterval(function (){
-
-              if(pos == length)
-                  clearInterval(id);
-              else{
-                  chart.clear();
-                  pos++;
-                  chart.update();
-              }
-          }, 10);
+          chart = new Chart(context).TickerLine(chartData, null);
 
           $('#infoModal').modal("hide");
         },
         failure: function(err){
-          console.log(err);
+            console.log('jack');
+            $('data-input-error').text(err);
+            $('data-input-error').css("visibility", "visible");
         }
     });
   });
@@ -128,20 +116,20 @@ Chart.types.Line.extend({
         showTooltips: false,
         pointDot : false,
         datasetFill : false,
+        animation: false,
     },
     draw: function () {
         Chart.types.Line.prototype.draw.apply(this, arguments);
 
-        var point = this.datasets[0].points[pos];
-        var scale = this.scale;
+        var one = this.datasets[0].points[Math.floor(pos)]; 
+        var two = this.datasets[0].points[Math.ceil(pos)];
+        var x = (one.x + two.x) / 2;
 
-        if(pos < length){
-            // draw line
-            this.chart.ctx.beginPath();
-            this.chart.ctx.moveTo(point.x, scale.startPoint + 24);
-            this.chart.ctx.strokeStyle = '#ff0000';
-            this.chart.ctx.lineTo(point.x, scale.endPoint);
-            this.chart.ctx.stroke();
-        }
+        // draw line
+        this.chart.ctx.beginPath();
+        this.chart.ctx.moveTo(x, this.scale.startPoint);
+        this.chart.ctx.strokeStyle = "#000";
+        this.chart.ctx.lineTo(x, this.scale.endPoint);
+        this.chart.ctx.stroke();
     }
 });

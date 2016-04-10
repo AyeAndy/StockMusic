@@ -10,7 +10,7 @@ var pattern;
 var currentData;
 var currentNote;
 var bpm = 240;
-
+var id = 0; // fill this later in Financial.js, id of the refreshing "process"
 
 function getData() {
 
@@ -89,7 +89,15 @@ function playNotes(){
 
     Tone.Transport.bpm.value = bpm;
     Tone.Transport.start();
+
     audio.play();
+
+    id = setInterval(function (){
+
+      chart.clear();
+      pos = (pos + 0.5) % length;
+      chart.update();
+    }, 125); // we update twice as often for smoother animation
 }
 
 function stopNotes(){
@@ -97,4 +105,5 @@ function stopNotes(){
     pattern.stop(0);
     audio.pause();
     Tone.Transport.stop();
+    clearInterval(id);
 }
