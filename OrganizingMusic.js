@@ -3,10 +3,10 @@ var majorScale = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5", "D5", "E5", "F
 var minorScale = ["C4", "D4", "Eb4", "F4", "G4", "A4", "Bb4", "C5", "D5", "Eb5", "F5", "G5", "A5", "Bb5", "C6", "Eb6"];
 var westernScale = ["G3", "A3", "C4", "D4", "E4", "G4", "A4", "C5", "D5", "E5", "G5", "A5", "C6", "D6", "E6", "G6"];
 var blueScale = ["C3", "Eb3", "F3", "F#3", "G3", "Bb3", "C4", "Eb4", "F4", "F#4", "G4", "Bb4", "C5", "Eb5", "F5", "F#5"];
-var currentScale = majorScale;
+var currentScale;
 var picked;
+var audio;
 var pattern;
-var audio = new Audio("DrumsBlues.mp3");
 var currentData;
 var currentNote;
 var bpm = 240;
@@ -56,11 +56,17 @@ function getData() {
     currentNote[i] = noteToAdd;
   }
 
-}
+  console.log(currentScale[15].localeCompare("F#5"));
 
-function pickGenre(){
+  if(currentScale[15].localeCompare("F#5") == 0){
+    audio = new Audio("DrumsBlues.mp3")
+  }
 
-  var buttonPicked;
+  if(currentScale[15].localeCompare("G6") == 0){
+    audio = new Audio("Flute.mp3")
+    synth = new Tone.SimpleSynth().toMaster();
+  }
+
 }
 
 /* Takes in an int representing data, and play the note depending on the data */
@@ -68,7 +74,6 @@ function playNotes(){
 
     getData();
 
-    synth = new Tone.DuoSynth().toMaster();
     var toPlay = new Array(currentData.length);
 
     for(var i = 0; i < currentData.length; i++){
@@ -81,9 +86,10 @@ function playNotes(){
     }, toPlay);
 
     pattern.start(0);
+
     Tone.Transport.bpm.value = bpm;
-    audio.play();
     Tone.Transport.start();
+    audio.play();
 }
 
 function stopNotes(){

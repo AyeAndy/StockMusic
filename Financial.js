@@ -16,22 +16,18 @@ $(document).ready(function() {
 
   $('#MajorButton').click(function() {
     currentScale = majorScale;
-    picked = "Major";
   });
 
   $('#MinorButton').click(function() {
     currentScale = minorScale;
-    picked = "Minor";
   });
 
   $('#WesternButton').click(function() {
     currentScale = westernScale;
-    picked = "Western";
   });
 
   $('#BluesButton').click(function() {
     currentScale = blueScale;
-    picked = "Blues";
   });
 
   $('#getdata-btn').click(function() {
